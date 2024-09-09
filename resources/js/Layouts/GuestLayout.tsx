@@ -14,6 +14,10 @@ export default function Guest({ children }: PropsWithChildren) {
             <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
                 {children}
             </div>
+
+            <div className='text-sm mt-3'>
+                Take me back to the <Link href='/' className='text-indigo-600 hover:text-indigo-500'>Home page</Link>
+            </div>
         </div>
     );
 }

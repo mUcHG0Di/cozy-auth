@@ -4,7 +4,7 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import { Head } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 
-export default function Register() {
+export default function Signup() {
     const { data, setData, post, processing, errors, reset } = useForm({
         username: '',
         email: '',
@@ -97,13 +97,13 @@ export default function Register() {
                         <div className="flex items-center justify-between"></div>
                             <div className="flex items-center">
                                 <input
-                                    id="agreedToTerms"
-                                    name="agreedToTerms"
+                                    id="agreed_to_terms"
+                                    name="agreed_to_terms"
                                     type="checkbox"
-                                    onChange={(e) => setData('agreed_to_terms', !! e.target.value)}
+                                    onChange={(e) => setData('agreed_to_terms', e.target.checked)}
                                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
                                 />
-                                <label htmlFor="agreedToTerms" className="ml-2 block text-base">
+                                <label htmlFor="agreed_to_terms" className="ml-2 block text-base">
                                     Agree to terms
                                 </label>
                                 {errors.agreed_to_terms && (
@@ -121,7 +121,12 @@ export default function Register() {
                     </div>
 
                     <div className='text-sm'>
-                        <p>Already have an account? <Link href={route('custom.auth.login')} className="font-medium text-indigo-600 hover:text-indigo-500">Login</Link></p>
+                        Already have an account? <a
+                            href={route('custom.auth.login')}
+                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                        >
+                            Login
+                        </a>
                     </div>
                 </div>
             </form>

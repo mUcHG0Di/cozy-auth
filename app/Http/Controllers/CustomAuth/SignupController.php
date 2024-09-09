@@ -19,7 +19,6 @@ class SignupController extends Controller
      */
     public function store(SignupRequest $request)
     {
-        \Log::debug($request->all());
         $user = User::create($request->all());
 
         auth()->login($user);

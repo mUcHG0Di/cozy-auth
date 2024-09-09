@@ -31,11 +31,10 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                         <label htmlFor="email" className="sr-only">Email</label>
                         <input
                             id="email"
-                            type="email"
+                            type="text"
                             name="email"
                             value={data.email}
                             onChange={(e) => setData('email', e.target.value)}
-                            required
                             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             placeholder="Email"
                         />
@@ -53,10 +52,14 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                             name="password"
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
-                            required
                             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             placeholder="Password"
                         />
+                        {errors.password && (
+                            <div className="mt-2 text-sm text-red-600">
+                                { errors.password }
+                            </div>
+                        )}
                     </div>
 
                     <div>
