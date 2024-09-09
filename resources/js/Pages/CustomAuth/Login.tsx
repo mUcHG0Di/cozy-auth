@@ -8,7 +8,6 @@ export default function Login({ status, canResetPassword }: { status?: string, c
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
-        agreedToTerms: false,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -40,6 +39,11 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             placeholder="Email"
                         />
+                        {errors.email && (
+                            <div className="mt-2 text-sm text-red-600">
+                                { errors.email }
+                            </div>
+                        )}
                     </div>
                     <div>
                         <label htmlFor="password" className="sr-only">Password</label>
@@ -54,26 +58,20 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                             placeholder="Password"
                         />
                     </div>
-                    <div>
-                        <div className="flex items-center justify-between"></div>
-                            <div className="flex items-center">
-                                <input
-                                    id="agreedToTerms"
-                                    name="agreedToTerms"
-                                    type="checkbox"
-                                    onChange={(e) => setData('agreedToTerms', e.target.value)}
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
-                                />
-                                <label htmlFor="agreedToTerms" className="ml-2 block text-base">
-                                    Agreed to terms
-                                </label>
-                            </div>
-                    </div>
 
                     <div>
-                        <PrimaryButton className="w-full" disabled={processing || data.agreedToTerms != true}>
+                        <PrimaryButton className="w-full" disabled={processing}>
                             <span className='w-full text-center'>Log in</span>
                         </PrimaryButton>
+                    </div>
+
+                    <div className='text-sm'>
+                        Don't have an account yet? <a
+                            href={route('custom.auth.signup')}
+                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                        >
+                            Sign up
+                        </a>
                     </div>
                 </div>
             </form>

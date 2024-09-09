@@ -31,13 +31,16 @@ class LoginControllerTest extends TestCase
         $this->postLogin()
             ->assertRedirect(uri: '/dashboard')
             ->assertCookie(cookieName: 'laravel_session');
+
+        $this->assertEquals(auth()->id(), $this->user->id);
     }
 
     public function testThrottlesLogin(): void
     {
         for ($i = 0; $i < 5; $i++) {
             $this->postLogin(password: 'wrong-password')
-                ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+                ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+                ->assertJsonStructure(['errors' => ['email']]);
         }
 
         $this->postLogin(password: 'wrong-password')

@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomAuth\LoginController;
-use App\Http\Controllers\CustomAuth\RegisterController;
+use App\Http\Controllers\CustomAuth\SignupController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,9 +34,13 @@ Route::prefix('custom/auth')->group(function () {
     Route::middleware('custom-guest')->group(function () {
         Route::get('/login', [LoginController::class, 'create']);
         Route::post('/login', [LoginController::class, 'store'])
-            ->middleware('throttle:5,1');
-        Route::get('/signup', [RegisterController::class, 'create']);
-        Route::post('/signup', [RegisterController::class, 'store']);
+            ->middleware('throttle:5,1')
+            ->name('custom.auth.login');
+
+        Route::get('/signup', [SignupController::class, 'create']);
+        Route::post('/signup', [SignupController::class, 'store'])
+            ->middleware('throttle:5,1')
+            ->name('custom.auth.signup');
     });
 
     Route::middleware('custom-auth')->group(function () {
